@@ -28,7 +28,7 @@ def doRecognizePerson(faceNames, fid):
 def detectAndTrackMultipleFaces():
     trackers = []
     #Open the first webcame device
-    capture = cv2.VideoCapture("shotgun.mp4")
+    capture = cv2.VideoCapture("TheBigBangTheory.mkv")
 
     #Create two opencv named windows
     cv2.namedWindow("base-image", cv2.WINDOW_AUTOSIZE)
@@ -334,7 +334,7 @@ def detectAndTrackMultipleFaces():
         pass
 
     #Destroy any OpenCV windows and exit the application
-    df = pd.DataFrame(trackers,columns=["frame","tracker","left","top","width","height"])
+    df = pd.DataFrame(trackers,columns=["frame","tracker","top","left","width","height"])
     print(df)
     df.to_csv('data.csv')
     cv2.destroyAllWindows()
