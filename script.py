@@ -1,10 +1,10 @@
 #Import the OpenCV and dlib libraries
 import cv2
 import dlib
-
 import pandas as pd
 import threading
 import time
+import sys
 
 #Initialize a face cascade using the frontal face haar cascade provided with
 #the OpenCV library
@@ -23,12 +23,10 @@ def doRecognizePerson(faceNames, fid):
     time.sleep(1)
     faceNames[ fid ] = "Person " + str(fid)
 
-
-
 def detectAndTrackMultipleFaces():
     trackers = []
     #Open the first webcame device
-    capture = cv2.VideoCapture("shotgun.mp4")
+    capture = cv2.VideoCapture(sys.argv[1])
 
     #Create two opencv named windows
     cv2.namedWindow("base-image", cv2.WINDOW_AUTOSIZE)
@@ -336,7 +334,7 @@ def detectAndTrackMultipleFaces():
     #Destroy any OpenCV windows and exit the application
     df = pd.DataFrame(trackers,columns=["frame","tracker","left","top","width","height"])
     print(df)
-    df.to_csv('data.csv')
+    df.to_csv(sys.argv[1][:-4] + '.csv')
     cv2.destroyAllWindows()
     exit(0)
 
